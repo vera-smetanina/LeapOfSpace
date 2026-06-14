@@ -1,0 +1,17 @@
+[
+  { "id": "easy-1", "difficulty": 1, "prompt": "Which planet do we live on?", "answerStyle": "multipleChoice", "answers": ["Earth"], "choices": ["Mars", "Earth", "Venus", "Jupiter"], "imageName": "question-earth", "hint": "It has blue oceans." },
+  { "id": "easy-2", "difficulty": 1, "prompt": "What gas do humans breathe in to stay alive?", "answerStyle": "text", "answers": ["oxygen"], "choices": null, "imageName": null, "hint": "Its symbol is O." },
+  { "id": "easy-3", "difficulty": 1, "prompt": "How many legs does an insect have?", "answerStyle": "multipleChoice", "answers": ["6", "six"], "choices": ["4", "6", "8", "10"], "imageName": null, "hint": null },
+  { "id": "medium-1", "difficulty": 2, "prompt": "What force pulls objects toward Earth?", "answerStyle": "text", "answers": ["gravity"], "choices": null, "imageName": null, "hint": "It keeps your feet on the ground." },
+  { "id": "medium-2", "difficulty": 2, "prompt": "Which part of a plant usually absorbs water?", "answerStyle": "multipleChoice", "answers": ["roots", "the roots"], "choices": ["Flowers", "Leaves", "Roots", "Fruit"], "imageName": "question-plant", "hint": null },
+  { "id": "medium-3", "difficulty": 2, "prompt": "What is frozen water called?", "answerStyle": "text", "answers": ["ice"], "choices": null, "imageName": null, "hint": null },
+  { "id": "middle-1", "difficulty": 3, "prompt": "Which organ pumps blood around your body?", "answerStyle": "multipleChoice", "answers": ["heart", "the heart"], "choices": ["Lungs", "Brain", "Heart", "Stomach"], "imageName": null, "hint": null },
+  { "id": "middle-2", "difficulty": 3, "prompt": "What is the closest star to Earth?", "answerStyle": "text", "answers": ["sun", "the sun"], "choices": null, "imageName": "question-sun", "hint": "We see it in the daytime." },
+  { "id": "middle-3", "difficulty": 3, "prompt": "A solid changing into a liquid is called what?", "answerStyle": "multipleChoice", "answers": ["melting"], "choices": ["Freezing", "Melting", "Condensing", "Evaporating"], "imageName": null, "hint": null },
+  { "id": "hard-1", "difficulty": 4, "prompt": "What is the chemical symbol for gold?", "answerStyle": "text", "answers": ["Au"], "choices": null, "imageName": null, "hint": "It has two letters." },
+  { "id": "hard-2", "difficulty": 4, "prompt": "Which blood cells help fight infection?", "answerStyle": "multipleChoice", "answers": ["white blood cells"], "choices": ["Red blood cells", "White blood cells", "Platelets", "Nerve cells"], "imageName": null, "hint": null },
+  { "id": "hard-3", "difficulty": 4, "prompt": "What process lets plants turn light into food?", "answerStyle": "text", "answers": ["photosynthesis"], "choices": null, "imageName": "question-leaf", "hint": "It starts with photo-." },
+  { "id": "expert-1", "difficulty": 5, "prompt": "Which particle has a negative electric charge?", "answerStyle": "multipleChoice", "answers": ["electron", "an electron"], "choices": ["Proton", "Neutron", "Electron", "Photon"], "imageName": "question-atom", "hint": null },
+  { "id": "expert-2", "difficulty": 5, "prompt": "What is the largest organ in the human body?", "answerStyle": "text", "answers": ["skin", "the skin"], "choices": null, "imageName": null, "hint": "It covers your whole body." },
+  { "id": "expert-3", "difficulty": 5, "prompt": "What is the name for an animal that eats both plants and animals?", "answerStyle": "multipleChoice", "answers": ["omnivore", "an omnivore"], "choices": ["Herbivore", "Carnivore", "Omnivore", "Decomposer"], "imageName": null, "hint": null }
+]

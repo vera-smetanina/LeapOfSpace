@@ -1,0 +1,10 @@
+[
+  { "id": "mercury", "name": "Mercury", "gravity": 3.70, "gravityDescription": "Low gravity - one of the gentlest pulls", "difficulty": 1, "colors": ["8A8178", "D8C3A5"], "imageName": "planet-mercury" },
+  { "id": "venus", "name": "Venus", "gravity": 8.87, "gravityDescription": "High gravity - close to Earth's pull", "difficulty": 4, "colors": ["C96F2D", "FFE0A3"], "imageName": "planet-venus" },
+  { "id": "earth", "name": "Earth", "gravity": 9.81, "gravityDescription": "High gravity - our familiar home pull", "difficulty": 4, "colors": ["1677D2", "43C66B"], "imageName": "planet-earth" },
+  { "id": "mars", "name": "Mars", "gravity": 3.71, "gravityDescription": "Low gravity - about 38% of Earth's", "difficulty": 1, "colors": ["9C2F16", "E77C45"], "imageName": "planet-mars" },
+  { "id": "jupiter", "name": "Jupiter", "gravity": 24.79, "gravityDescription": "The strongest planetary gravity", "difficulty": 5, "colors": ["B66E3A", "F1D0A4"], "imageName": "planet-jupiter" },
+  { "id": "saturn", "name": "Saturn", "gravity": 10.44, "gravityDescription": "Very high gravity - a little above Earth's", "difficulty": 5, "colors": ["D7B56D", "FFF0B8"], "imageName": "planet-saturn" },
+  { "id": "uranus", "name": "Uranus", "gravity": 8.69, "gravityDescription": "Middle-to-high gravity", "difficulty": 3, "colors": ["79D4DE", "D6FBFF"], "imageName": "planet-uranus" },
+  { "id": "neptune", "name": "Neptune", "gravity": 11.15, "gravityDescription": "Very high gravity - second strongest", "difficulty": 5, "colors": ["2456D6", "56A8FF"], "imageName": "planet-neptune" }
+]

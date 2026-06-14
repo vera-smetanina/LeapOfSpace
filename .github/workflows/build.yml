@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: Build ${{ matrix.name }}
+    runs-on: macos-15
+    strategy:
+      matrix:
+        include:
+          - name: macOS
+            destination: generic/platform=macOS
+          - name: iOS
+            destination: generic/platform=iOS
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build The Leap of Space
+        run: >-
+          xcodebuild
+          -project LeapOfSpace.xcodeproj
+          -scheme LeapOfSpace
+          -configuration Debug
+          -destination '${{ matrix.destination }}'
+          -derivedDataPath "$RUNNER_TEMP/LeapOfSpaceDerivedData"
+          CODE_SIGNING_ALLOWED=NO
+          build
