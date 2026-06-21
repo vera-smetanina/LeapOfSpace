@@ -1,17 +1,615 @@
 [
-  { "id": "easy-1", "difficulty": 1, "prompt": "Which planet do we live on?", "answerStyle": "multipleChoice", "answers": ["Earth"], "choices": ["Mars", "Earth", "Venus", "Jupiter"], "imageName": "question-earth", "hint": "It has blue oceans." },
-  { "id": "easy-2", "difficulty": 1, "prompt": "What gas do humans breathe in to stay alive?", "answerStyle": "text", "answers": ["oxygen"], "choices": null, "imageName": null, "hint": "Its symbol is O." },
-  { "id": "easy-3", "difficulty": 1, "prompt": "How many legs does an insect have?", "answerStyle": "multipleChoice", "answers": ["6", "six"], "choices": ["4", "6", "8", "10"], "imageName": null, "hint": null },
-  { "id": "medium-1", "difficulty": 2, "prompt": "What force pulls objects toward Earth?", "answerStyle": "text", "answers": ["gravity"], "choices": null, "imageName": null, "hint": "It keeps your feet on the ground." },
-  { "id": "medium-2", "difficulty": 2, "prompt": "Which part of a plant usually absorbs water?", "answerStyle": "multipleChoice", "answers": ["roots", "the roots"], "choices": ["Flowers", "Leaves", "Roots", "Fruit"], "imageName": "question-plant", "hint": null },
-  { "id": "medium-3", "difficulty": 2, "prompt": "What is frozen water called?", "answerStyle": "text", "answers": ["ice"], "choices": null, "imageName": null, "hint": null },
-  { "id": "middle-1", "difficulty": 3, "prompt": "Which organ pumps blood around your body?", "answerStyle": "multipleChoice", "answers": ["heart", "the heart"], "choices": ["Lungs", "Brain", "Heart", "Stomach"], "imageName": null, "hint": null },
-  { "id": "middle-2", "difficulty": 3, "prompt": "What is the closest star to Earth?", "answerStyle": "text", "answers": ["sun", "the sun"], "choices": null, "imageName": "question-sun", "hint": "We see it in the daytime." },
-  { "id": "middle-3", "difficulty": 3, "prompt": "A solid changing into a liquid is called what?", "answerStyle": "multipleChoice", "answers": ["melting"], "choices": ["Freezing", "Melting", "Condensing", "Evaporating"], "imageName": null, "hint": null },
-  { "id": "hard-1", "difficulty": 4, "prompt": "What is the chemical symbol for gold?", "answerStyle": "text", "answers": ["Au"], "choices": null, "imageName": null, "hint": "It has two letters." },
-  { "id": "hard-2", "difficulty": 4, "prompt": "Which blood cells help fight infection?", "answerStyle": "multipleChoice", "answers": ["white blood cells"], "choices": ["Red blood cells", "White blood cells", "Platelets", "Nerve cells"], "imageName": null, "hint": null },
-  { "id": "hard-3", "difficulty": 4, "prompt": "What process lets plants turn light into food?", "answerStyle": "text", "answers": ["photosynthesis"], "choices": null, "imageName": "question-leaf", "hint": "It starts with photo-." },
-  { "id": "expert-1", "difficulty": 5, "prompt": "Which particle has a negative electric charge?", "answerStyle": "multipleChoice", "answers": ["electron", "an electron"], "choices": ["Proton", "Neutron", "Electron", "Photon"], "imageName": "question-atom", "hint": null },
-  { "id": "expert-2", "difficulty": 5, "prompt": "What is the largest organ in the human body?", "answerStyle": "text", "answers": ["skin", "the skin"], "choices": null, "imageName": null, "hint": "It covers your whole body." },
-  { "id": "expert-3", "difficulty": 5, "prompt": "What is the name for an animal that eats both plants and animals?", "answerStyle": "multipleChoice", "answers": ["omnivore", "an omnivore"], "choices": ["Herbivore", "Carnivore", "Omnivore", "Decomposer"], "imageName": null, "hint": null }
+  {
+    "id": "easy-01",
+    "difficulty": 1,
+    "prompt": "At what temperature does water boil in degrees Celsius?",
+    "answerStyle": "text",
+    "answers": ["100", "100 degrees Celsius", "100 degrees C"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-02",
+    "difficulty": 1,
+    "prompt": "At what temperature does water freeze in degrees Celsius?",
+    "answerStyle": "text",
+    "answers": ["0", "0 degrees Celsius", "zero degrees Celsius"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-03",
+    "difficulty": 1,
+    "prompt": "What is the largest planet in the Solar System?",
+    "answerStyle": "text",
+    "answers": ["Jupiter"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-04",
+    "difficulty": 1,
+    "prompt": "What is the smallest planet in the Solar System?",
+    "answerStyle": "text",
+    "answers": ["Mercury"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-05",
+    "difficulty": 1,
+    "prompt": "How many planets are in the Solar System?",
+    "answerStyle": "text",
+    "answers": ["8", "eight"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-06",
+    "difficulty": 1,
+    "prompt": "What is the hottest planet in the Solar System?",
+    "answerStyle": "text",
+    "answers": ["Venus"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-07",
+    "difficulty": 1,
+    "prompt": "What is the coldest planet in the Solar System?",
+    "answerStyle": "text",
+    "answers": ["Neptune"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-08",
+    "difficulty": 1,
+    "prompt": "What type of animal is an owl?",
+    "answerStyle": "text",
+    "answers": ["bird", "a bird"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-09",
+    "difficulty": 1,
+    "prompt": "What type of animal is a frog?",
+    "answerStyle": "text",
+    "answers": ["amphibian", "an amphibian"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-10",
+    "difficulty": 1,
+    "prompt": "What type of animal is a dolphin?",
+    "answerStyle": "text",
+    "answers": ["mammal", "a mammal"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-11",
+    "difficulty": 1,
+    "prompt": "What do you call the variable you change in an experiment?",
+    "answerStyle": "text",
+    "answers": ["independent variable", "the independent variable"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-12",
+    "difficulty": 1,
+    "prompt": "What do you call the variable you measure in an experiment?",
+    "answerStyle": "text",
+    "answers": ["dependent variable", "the dependent variable"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-13",
+    "difficulty": 1,
+    "prompt": "What do you call the variables you keep the same in an experiment?",
+    "answerStyle": "text",
+    "answers": ["control variables", "controlled variables", "the control variables"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-14",
+    "difficulty": 1,
+    "prompt": "What is our galaxy called?",
+    "answerStyle": "text",
+    "answers": ["Milky Way", "the Milky Way", "Milky Way galaxy"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-15",
+    "difficulty": 1,
+    "prompt": "Who was the first person to walk on the Moon?",
+    "answerStyle": "text",
+    "answers": ["Neil Armstrong", "Armstrong"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-16",
+    "difficulty": 1,
+    "prompt": "What is the state change called when a liquid turns into a solid?",
+    "answerStyle": "text",
+    "answers": ["freezing"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-17",
+    "difficulty": 1,
+    "prompt": "What is the state change called when a solid turns into a liquid?",
+    "answerStyle": "text",
+    "answers": ["melting"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-18",
+    "difficulty": 1,
+    "prompt": "What is the state change called when a liquid turns into a gas?",
+    "answerStyle": "text",
+    "answers": ["evaporation", "evaporating", "vaporisation", "vaporization"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-19",
+    "difficulty": 1,
+    "prompt": "What is the state change called when a gas turns into a liquid?",
+    "answerStyle": "text",
+    "answers": ["condensation", "condensing"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-20",
+    "difficulty": 1,
+    "prompt": "What force attracts masses toward planets and other celestial bodies?",
+    "answerStyle": "text",
+    "answers": ["gravity", "gravitational force"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "easy-21",
+    "difficulty": 1,
+    "prompt": "Which element allows humans and most animals to breathe?",
+    "answerStyle": "text",
+    "answers": ["oxygen", "O", "O2"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-01",
+    "difficulty": 3,
+    "prompt": "Which two elements make up water?",
+    "answerStyle": "text",
+    "answers": ["hydrogen and oxygen", "oxygen and hydrogen", "hydrogen oxygen", "H2O"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-02",
+    "difficulty": 3,
+    "prompt": "What is the Sun mostly made of?",
+    "answerStyle": "text",
+    "answers": ["hydrogen", "mostly hydrogen"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-03",
+    "difficulty": 3,
+    "prompt": "What is the lightest element in the periodic table?",
+    "answerStyle": "text",
+    "answers": ["hydrogen", "H"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-04",
+    "difficulty": 3,
+    "prompt": "What is the closest star to Earth?",
+    "answerStyle": "text",
+    "answers": ["Sun", "the Sun"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-05",
+    "difficulty": 3,
+    "prompt": "Where is the smallest bone in the human body?",
+    "answerStyle": "text",
+    "answers": ["ear", "in the ear", "middle ear", "in the middle ear"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-06",
+    "difficulty": 3,
+    "prompt": "Approximately what percentage of Earth's water is fresh water?",
+    "answerStyle": "text",
+    "answers": ["3", "3%", "three percent"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-07",
+    "difficulty": 3,
+    "prompt": "Approximately what percentage of Earth's surface is covered by water?",
+    "answerStyle": "text",
+    "answers": ["71", "71%", "seventy one percent"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-08",
+    "difficulty": 3,
+    "prompt": "Which planet has the tallest mountain in the Solar System?",
+    "answerStyle": "text",
+    "answers": ["Mars"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-09",
+    "difficulty": 3,
+    "prompt": "Which planet has the most known moons?",
+    "answerStyle": "text",
+    "answers": ["Saturn"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-10",
+    "difficulty": 3,
+    "prompt": "How many planets in the Solar System have rings?",
+    "answerStyle": "text",
+    "answers": ["4", "four"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-11",
+    "difficulty": 3,
+    "prompt": "Name all four giant outer planets.",
+    "answerStyle": "text",
+    "answers": [
+      "Jupiter Saturn Uranus Neptune",
+      "Jupiter, Saturn, Uranus and Neptune",
+      "Jupiter, Saturn, Uranus, Neptune"
+    ],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-12",
+    "difficulty": 3,
+    "prompt": "What is a scientific name for the giant outer planets?",
+    "answerStyle": "text",
+    "answers": ["Jovian planets", "Jovian planet", "giant planets"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-13",
+    "difficulty": 3,
+    "prompt": "Name all four rocky planets.",
+    "answerStyle": "text",
+    "answers": [
+      "Mercury Venus Earth Mars",
+      "Mercury, Venus, Earth and Mars",
+      "Mercury, Venus, Earth, Mars"
+    ],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-14",
+    "difficulty": 3,
+    "prompt": "What is the scientific name for rocky planets?",
+    "answerStyle": "text",
+    "answers": ["terrestrial planets", "terrestrial planet"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-15",
+    "difficulty": 3,
+    "prompt": "Which comet orbits the Sun roughly every 76 years?",
+    "answerStyle": "text",
+    "answers": ["Halley's Comet", "Halley Comet", "Halley's"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-01",
+    "difficulty": 4,
+    "prompt": "What is the name of the tallest mountain in the Solar System?",
+    "answerStyle": "text",
+    "answers": ["Olympus Mons"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-02",
+    "difficulty": 4,
+    "prompt": "How many known moons does Saturn have?",
+    "answerStyle": "text",
+    "answers": ["274", "two hundred and seventy four"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-03",
+    "difficulty": 4,
+    "prompt": "How many known moons does Jupiter have?",
+    "answerStyle": "text",
+    "answers": ["95", "ninety five"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-04",
+    "difficulty": 4,
+    "prompt": "Which planet has the most intense radiation environment?",
+    "answerStyle": "text",
+    "answers": ["Jupiter"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-05",
+    "difficulty": 4,
+    "prompt": "Which planet receives the most ultraviolet radiation from the Sun?",
+    "answerStyle": "text",
+    "answers": ["Mercury"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-06",
+    "difficulty": 4,
+    "prompt": "What is the seventh-lightest element in the periodic table?",
+    "answerStyle": "text",
+    "answers": ["nitrogen", "N"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-07",
+    "difficulty": 4,
+    "prompt": "What is the state change called when a gas turns directly into a solid?",
+    "answerStyle": "text",
+    "answers": ["deposition", "desublimation"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-08",
+    "difficulty": 4,
+    "prompt": "What is the state change called when a solid turns directly into a gas?",
+    "answerStyle": "text",
+    "answers": ["sublimation"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-09",
+    "difficulty": 4,
+    "prompt": "How many astronauts have walked on the Moon?",
+    "answerStyle": "text",
+    "answers": ["12", "twelve"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-10",
+    "difficulty": 4,
+    "prompt": "People from approximately how many different countries have travelled to space?",
+    "answerStyle": "text",
+    "answers": ["55", "fifty five"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-11",
+    "difficulty": 4,
+    "prompt": "How do you calculate the density of an object?",
+    "answerStyle": "text",
+    "answers": [
+      "divide mass by volume",
+      "mass divided by volume",
+      "density equals mass divided by volume",
+      "m/v"
+    ],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-12",
+    "difficulty": 4,
+    "prompt": "What is the name of the smallest bone in the human body?",
+    "answerStyle": "text",
+    "answers": ["stapes", "the stapes"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-13",
+    "difficulty": 4,
+    "prompt": "Approximately what percentage of the human body is water?",
+    "answerStyle": "text",
+    "answers": ["60", "60%", "sixty percent"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-01",
+    "difficulty": 5,
+    "prompt": "What is the heaviest element in the periodic table?",
+    "answerStyle": "text",
+    "answers": ["oganesson", "Og"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-02",
+    "difficulty": 5,
+    "prompt": "Approximately how often do Earth and Mars return to the same relative orbital positions?",
+    "answerStyle": "text",
+    "answers": ["26 months", "2 years and 2 months", "two years and two months"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-03",
+    "difficulty": 5,
+    "prompt": "Approximately how fast is the speed of light in kilometres per second?",
+    "answerStyle": "text",
+    "answers": ["300000", "300,000", "300000 km/s", "approximately 300000 kilometres per second"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-04",
+    "difficulty": 5,
+    "prompt": "What is the closest major galaxy to the Milky Way?",
+    "answerStyle": "text",
+    "answers": ["Andromeda", "Andromeda galaxy", "the Andromeda galaxy"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-05",
+    "difficulty": 5,
+    "prompt": "Approximately how many galaxies are thought to be in the observable universe?",
+    "answerStyle": "text",
+    "answers": [
+      "between 200 billion and 2 trillion",
+      "200 billion to 2 trillion",
+      "about 2 trillion",
+      "2 trillion"
+    ],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-06",
+    "difficulty": 5,
+    "prompt": "What era did the dinosaurs live in?",
+    "answerStyle": "text",
+    "answers": ["Mesozoic", "Mesozoic era", "the Mesozoic era"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-07",
+    "difficulty": 5,
+    "prompt": "What is the largest comet ever discovered?",
+    "answerStyle": "text",
+    "answers": [
+      "Bernardinelli-Bernstein",
+      "Bernardinelli Bernstein",
+      "Comet Bernardinelli-Bernstein",
+      "C/2014 UN271"
+    ],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-08",
+    "difficulty": 5,
+    "prompt": "Approximately how heavy is an adult human brain?",
+    "answerStyle": "text",
+    "answers": ["1.3 kg", "1.3 kilograms", "1300 grams"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-09",
+    "difficulty": 5,
+    "prompt": "In what year did Newton publish his theory of universal gravitation?",
+    "answerStyle": "text",
+    "answers": ["1687"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-10",
+    "difficulty": 5,
+    "prompt": "In what year did Einstein publish his theory of general relativity?",
+    "answerStyle": "text",
+    "answers": ["1915"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  }
 ]

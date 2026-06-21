@@ -93,12 +93,13 @@ final class GameStore: ObservableObject {
 
     private func prepareQuestion() {
         guard let planet = selectedPlanet else { return }
+        let allowedDifficulties = planet.id == "earth" ? Set([3, 4]) : Set([planet.difficulty])
         var pool = questions.filter {
-            abs($0.difficulty - planet.difficulty) <= 1 && !usedQuestionIDs.contains($0.id)
+            allowedDifficulties.contains($0.difficulty) && !usedQuestionIDs.contains($0.id)
         }
         if pool.isEmpty {
             usedQuestionIDs = []
-            pool = questions.filter { abs($0.difficulty - planet.difficulty) <= 1 }
+            pool = questions.filter { allowedDifficulties.contains($0.difficulty) }
         }
         currentQuestion = pool.randomElement() ?? questions.randomElement()
         if let currentQuestion { usedQuestionIDs.insert(currentQuestion.id) }
