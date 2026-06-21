@@ -145,9 +145,14 @@ struct QuestionView: View {
         if let question = game.currentQuestion {
             Button(action: game.revealAnswerScreen) {
                 VStack(spacing: 24) {
-                    Text("SCIENCE QUESTION")
-                        .font(.headline)
-                        .foregroundStyle(Color(hex: "FFE347"))
+                    HStack {
+                        Text("QUESTION \(game.questionProgress)")
+                        Spacer()
+                        GameTimerView()
+                    }
+                    .font(.headline.monospacedDigit())
+                    .foregroundStyle(Color(hex: "FFE347"))
+                    .frame(maxWidth: 620)
                     GlassCard {
                         VStack(spacing: 18) {
                             Text(question.prompt)
@@ -186,6 +191,14 @@ struct AnswerView: View {
     var body: some View {
         if let question = game.currentQuestion {
             VStack(spacing: 22) {
+                HStack {
+                    Text("QUESTION \(game.questionProgress)")
+                    Spacer()
+                    GameTimerView()
+                }
+                .font(.headline.monospacedDigit())
+                .foregroundStyle(Color(hex: "FFE347"))
+                .frame(maxWidth: 620)
                 Text(question.prompt)
                     .font(.title.bold())
                     .multilineTextAlignment(.center)
@@ -247,16 +260,32 @@ struct LoadingView: View {
 }
 
 struct ResultView: View {
+    @EnvironmentObject private var game: GameStore
     let isCorrect: Bool
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
                 .font(.system(size: 120, weight: .black))
+                .foregroundStyle(isCorrect ? .green : .red)
             Text(isCorrect ? "CORRECT!" : "INCORRECT")
                 .font(.system(size: 54, weight: .black, design: .rounded))
                 .minimumScaleFactor(0.6)
+                .foregroundStyle(isCorrect ? .green : .red)
+            if !isCorrect, let answer = game.currentQuestion?.answers.first {
+                GlassCard {
+                    VStack(spacing: 8) {
+                        Text("THE CORRECT ANSWER IS")
+                            .font(.headline)
+                            .foregroundStyle(.white.opacity(0.75))
+                        Text(answer)
+                            .font(.system(size: 30, weight: .black, design: .rounded))
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Color(hex: "FFE347"))
+                    }
+                    .frame(maxWidth: 520)
+                }
+            }
         }
-        .foregroundStyle(isCorrect ? .green : .red)
     }
 }
 
@@ -295,7 +324,34 @@ struct FinishView: View {
             Text("\(game.streak) PLATFORM\(game.streak == 1 ? "" : "S")")
                 .font(.title.bold())
                 .padding(.top, 28)
+            Text("TIME \(game.finalTime.gameTimeText)")
+                .font(.title2.bold().monospacedDigit())
+                .foregroundStyle(Color(hex: "FFE347"))
+                .padding(.top, 8)
         }
+    }
+}
+
+struct WinnerView: View {
+    @EnvironmentObject private var game: GameStore
+
+    var body: some View {
+        VStack(spacing: 22) {
+            Image(systemName: "star.circle.fill")
+                .font(.system(size: 110))
+            Text("YOU WON!")
+                .font(.system(size: 62, weight: .black, design: .rounded))
+                .minimumScaleFactor(0.6)
+            Text("You answered every question correctly!")
+                .font(.title2.bold())
+                .multilineTextAlignment(.center)
+            Text("\(game.streak) QUESTIONS  •  \(game.finalTime.gameTimeText)")
+                .font(.headline.monospacedDigit())
+        }
+        .foregroundStyle(Color(hex: "FFE347"))
+        .padding(40)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 32))
+        .overlay(RoundedRectangle(cornerRadius: 32).stroke(.white.opacity(0.4), lineWidth: 2))
     }
 }
 
@@ -337,9 +393,14 @@ struct LeaderboardView: View {
                                 Text(score.playerName)
                                     .font(.headline)
                                 Spacer()
-                                Text("\(score.streak)")
-                                    .font(.title2.monospacedDigit())
-                                    .foregroundStyle(Color(hex: "FFE347"))
+                                VStack(alignment: .trailing, spacing: 2) {
+                                    Text("\(score.streak) platform\(score.streak == 1 ? "" : "s")")
+                                        .font(.headline.monospacedDigit())
+                                        .foregroundStyle(Color(hex: "FFE347"))
+                                    Text(score.duration?.gameTimeText ?? "Time not recorded")
+                                        .font(.caption.monospacedDigit())
+                                        .foregroundStyle(.white.opacity(0.7))
+                                }
                             }
                             if index < game.selectedPlanetScores.count - 1 { Divider() }
                         }
@@ -353,6 +414,17 @@ struct LeaderboardView: View {
             }
             .padding(.vertical)
         }
+    }
+}
+
+struct GameTimerView: View {
+    @EnvironmentObject private var game: GameStore
+
+    var body: some View {
+        TimelineView(.periodic(from: .now, by: 0.1)) { _ in
+            Label(game.currentElapsedTime.gameTimeText, systemImage: "stopwatch.fill")
+        }
+        .accessibilityLabel("Elapsed time \(game.currentElapsedTime.gameTimeText)")
     }
 }
 

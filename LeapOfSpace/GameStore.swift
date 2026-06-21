@@ -9,11 +9,13 @@ final class GameStore: ObservableObject {
     @Published var typedAnswer = ""
     @Published var streak = 0
     @Published var isNewRecord = false
+    @Published private(set) var finalTime: TimeInterval = 0
     @Published private(set) var planets: [Planet] = []
     @Published private(set) var scores: [ScoreEntry] = []
 
     private var questions: [ScienceQuestion] = []
     private var usedQuestionIDs: Set<String> = []
+    private var gameStartedAt: Date?
     private var transitionTask: Task<Void, Never>?
     private let scoreKey = "leapOfSpace.scores"
 
@@ -37,10 +39,31 @@ final class GameStore: ObservableObject {
         return scores
             .filter { $0.planetID == selectedPlanet.id }
             .sorted { lhs, rhs in
-                lhs.streak == rhs.streak ? lhs.date > rhs.date : lhs.streak > rhs.streak
+                if lhs.streak != rhs.streak {
+                    return lhs.streak > rhs.streak
+                }
+                let lhsDuration = lhs.duration ?? .infinity
+                let rhsDuration = rhs.duration ?? .infinity
+                if lhsDuration != rhsDuration {
+                    return lhsDuration < rhsDuration
+                }
+                return lhs.date < rhs.date
             }
             .prefix(10)
             .map { $0 }
+    }
+
+    var currentElapsedTime: TimeInterval {
+        if finalTime > 0 {
+            return finalTime
+        }
+        guard let gameStartedAt else { return 0 }
+        return Date().timeIntervalSince(gameStartedAt)
+    }
+
+    var questionProgress: String {
+        guard let selectedPlanet else { return "" }
+        return "\(usedQuestionIDs.count) / \(eligibleQuestions(for: selectedPlanet).count)"
     }
 
     func play() {
@@ -56,6 +79,9 @@ final class GameStore: ObservableObject {
     func beginPlanet() {
         streak = 0
         usedQuestionIDs = []
+        gameStartedAt = nil
+        finalTime = 0
+        isNewRecord = false
         screen = .astronaut
         after(seconds: 2) { [weak self] in self?.prepareQuestion() }
     }
@@ -69,12 +95,18 @@ final class GameStore: ObservableObject {
         guard let question = currentQuestion else { return }
         let response = choice ?? typedAnswer
         let correct = question.answers.contains { Self.answersMatch(response, $0) }
+        let completedAllQuestions = correct && usedQuestionIDs.count == eligibleQuestionsForSelectedPlanet.count
+        if !correct || completedAllQuestions {
+            stopTimer()
+        }
         screen = .loading
 
         after(seconds: 1.5) { [weak self] in
             guard let self else { return }
             self.screen = .result(isCorrect: correct)
-            self.after(seconds: 1.5) { [weak self] in self?.showMovement(correct: correct) }
+            self.after(seconds: correct ? 1.5 : 3) { [weak self] in
+                self?.showMovement(correct: correct, completedAllQuestions: completedAllQuestions)
+            }
         }
     }
 
@@ -88,46 +120,66 @@ final class GameStore: ObservableObject {
         selectedPlanet = nil
         currentQuestion = nil
         streak = 0
+        gameStartedAt = nil
+        finalTime = 0
         screen = .home
     }
 
     private func prepareQuestion() {
         guard let planet = selectedPlanet else { return }
-        let allowedDifficulties = planet.id == "earth" ? Set([3, 4]) : Set([planet.difficulty])
-        var pool = questions.filter {
-            allowedDifficulties.contains($0.difficulty) && !usedQuestionIDs.contains($0.id)
+        if gameStartedAt == nil {
+            gameStartedAt = Date()
+        }
+        let pool = eligibleQuestions(for: planet).filter {
+            !usedQuestionIDs.contains($0.id)
         }
         if pool.isEmpty {
-            usedQuestionIDs = []
-            pool = questions.filter { allowedDifficulties.contains($0.difficulty) }
+            stopTimer()
+            showWinner()
+            return
         }
-        currentQuestion = pool.randomElement() ?? questions.randomElement()
+        currentQuestion = pool.randomElement()
         if let currentQuestion { usedQuestionIDs.insert(currentQuestion.id) }
         screen = .question
     }
 
-    private func showMovement(correct: Bool) {
+    private func showMovement(correct: Bool, completedAllQuestions: Bool) {
         screen = .movement(isUp: correct)
         if correct {
             streak += 1
-            after(seconds: 1.5) { [weak self] in self?.prepareQuestion() }
+            after(seconds: 1.5) { [weak self] in
+                if completedAllQuestions {
+                    self?.showWinner()
+                } else {
+                    self?.prepareQuestion()
+                }
+            }
         } else {
             after(seconds: 1.5) { [weak self] in self?.completeGame() }
         }
     }
 
+    private func showWinner() {
+        screen = .winner
+        after(seconds: 2.5) { [weak self] in self?.completeGame() }
+    }
+
     private func completeGame() {
         guard let planet = selectedPlanet else { return }
-        let previousBest = scores
+        stopTimer()
+        let previousScores = scores
             .filter { $0.planetID == planet.id && $0.playerName == displayName }
-            .map(\.streak)
-            .max() ?? -1
-        isNewRecord = streak > previousBest
-        scores.append(ScoreEntry(
-            id: UUID(), playerName: displayName, planetID: planet.id,
-            planetName: planet.name, streak: streak, date: Date()
-        ))
-        saveScores()
+        isNewRecord = streak > 0 && previousScores.allSatisfy {
+            streak > $0.streak ||
+                (streak == $0.streak && finalTime < ($0.duration ?? .infinity))
+        }
+        if streak > 0 {
+            scores.append(ScoreEntry(
+                id: UUID(), playerName: displayName, planetID: planet.id,
+                planetName: planet.name, streak: streak, duration: finalTime, date: Date()
+            ))
+            saveScores()
+        }
         screen = .finish
         after(seconds: 1.8) { [weak self] in
             guard let self else { return }
@@ -155,6 +207,21 @@ final class GameStore: ObservableObject {
     private func saveScores() {
         guard let data = try? JSONEncoder().encode(scores) else { return }
         UserDefaults.standard.set(data, forKey: scoreKey)
+    }
+
+    private var eligibleQuestionsForSelectedPlanet: [ScienceQuestion] {
+        guard let selectedPlanet else { return [] }
+        return eligibleQuestions(for: selectedPlanet)
+    }
+
+    private func eligibleQuestions(for planet: Planet) -> [ScienceQuestion] {
+        let allowedDifficulties = planet.id == "earth" ? Set([3, 4]) : Set([planet.difficulty])
+        return questions.filter { allowedDifficulties.contains($0.difficulty) }
+    }
+
+    private func stopTimer() {
+        guard finalTime == 0, let gameStartedAt else { return }
+        finalTime = Date().timeIntervalSince(gameStartedAt)
     }
 
     private static func load<T: Decodable>(_ type: T.Type, file: String) -> T {

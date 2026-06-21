@@ -29,6 +29,8 @@ struct ContentView: View {
                     ResultView(isCorrect: isCorrect)
                 case .movement(let isUp):
                     MovementView(isUp: isUp)
+                case .winner:
+                    WinnerView()
                 case .finish:
                     FinishView()
                 case .newRecord:

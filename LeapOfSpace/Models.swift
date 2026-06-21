@@ -37,6 +37,7 @@ struct ScoreEntry: Codable, Identifiable {
     let planetID: String
     let planetName: String
     let streak: Int
+    let duration: TimeInterval?
     let date: Date
 }
 
@@ -51,9 +52,20 @@ enum GameScreen: Equatable {
     case loading
     case result(isCorrect: Bool)
     case movement(isUp: Bool)
+    case winner
     case finish
     case newRecord
     case leaderboard
+}
+
+extension TimeInterval {
+    var gameTimeText: String {
+        let tenths = max(0, Int((self * 10).rounded()))
+        let minutes = tenths / 600
+        let seconds = (tenths % 600) / 10
+        let fraction = tenths % 10
+        return String(format: "%d:%02d.%d", minutes, seconds, fraction)
+    }
 }
 
 extension Color {

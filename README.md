@@ -12,7 +12,10 @@ The game already includes:
 - multiple-choice and typed-answer screens
 - forgiving spelling for typed answers
 - loading, correct, incorrect, jump, fall, finish, and new-record screens
-- a separate saved leaderboard for every planet
+- the correct answer after an incorrect response
+- a winning screen when every available question is answered correctly
+- a separate timed leaderboard for every planet
+- fastest-time ranking when two players have the same score
 - buttons to retry a planet or go home
 
 ## 1. Open and play the game
