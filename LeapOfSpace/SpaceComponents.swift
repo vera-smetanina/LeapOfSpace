@@ -60,6 +60,26 @@ struct PrimaryButton: View {
             .background(Color(hex: "FFE347"), in: Capsule())
             .overlay(Capsule().stroke(.white.opacity(0.8), lineWidth: 2))
             .shadow(color: Color(hex: "FFE347").opacity(0.55), radius: 12)
+            .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+struct ChoiceButton: View {
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.title3.bold())
+                .foregroundStyle(.white)
+                .padding()
+                .frame(maxWidth: 520)
+                .background(.white.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
+                .overlay(RoundedRectangle(cornerRadius: 16).stroke(.cyan.opacity(0.7), lineWidth: 2))
+                .contentShape(RoundedRectangle(cornerRadius: 16))
         }
         .buttonStyle(.plain)
     }

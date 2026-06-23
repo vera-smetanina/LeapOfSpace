@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var game: GameStore
+    @FocusState private var nameFieldIsFocused: Bool
 
     var body: some View {
         VStack(spacing: 28) {
@@ -26,6 +27,8 @@ struct HomeView: View {
                         .font(.title3.bold())
                         .padding(12)
                         .background(.black.opacity(0.3), in: RoundedRectangle(cornerRadius: 12))
+                        .focused($nameFieldIsFocused)
+                        .onSubmit(game.play)
                 }
                 .frame(maxWidth: 360)
             }
@@ -34,6 +37,10 @@ struct HomeView: View {
             Text("Science gets harder as gravity gets stronger")
                 .font(.footnote)
                 .foregroundStyle(.white.opacity(0.7))
+        }
+        .task {
+            await Task.yield()
+            nameFieldIsFocused = true
         }
     }
 }
@@ -109,6 +116,8 @@ struct PlanetPickerView: View {
                                                 .font(.caption.monospacedDigit())
                                                 .foregroundStyle(.white.opacity(0.7))
                                         }
+                                        .frame(maxWidth: .infinity)
+                                        .contentShape(Rectangle())
                                     }
                                     .buttonStyle(.plain)
                                 }
@@ -254,6 +263,8 @@ struct QuestionView: View {
 
 struct AnswerView: View {
     @EnvironmentObject private var game: GameStore
+    @FocusState private var answerFieldIsFocused: Bool
+
     var body: some View {
         if let question = game.currentQuestion {
             VStack(spacing: 22) {
@@ -271,14 +282,9 @@ struct AnswerView: View {
                 if question.answerStyle == .multipleChoice {
                     VStack(spacing: 12) {
                         ForEach(question.choices ?? [], id: \.self) { choice in
-                            Button(choice) { game.submit(choice: choice) }
-                                .font(.title3.bold())
-                                .foregroundStyle(.white)
-                                .padding()
-                                .frame(maxWidth: 520)
-                                .background(.white.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
-                                .overlay(RoundedRectangle(cornerRadius: 16).stroke(.cyan.opacity(0.7), lineWidth: 2))
-                                .buttonStyle(.plain)
+                            ChoiceButton(title: choice) {
+                                game.submit(choice: choice)
+                            }
                         }
                     }
                 } else {
@@ -289,6 +295,7 @@ struct AnswerView: View {
                                 .font(.title2.bold())
                                 .padding()
                                 .background(.black.opacity(0.3), in: RoundedRectangle(cornerRadius: 14))
+                                .focused($answerFieldIsFocused)
                                 .onSubmit { game.submit() }
                             Text("Small spelling mistakes are okay.")
                                 .font(.caption)
@@ -298,6 +305,11 @@ struct AnswerView: View {
                         .frame(maxWidth: 500)
                     }
                 }
+            }
+            .task(id: question.id) {
+                guard question.answerStyle == .text else { return }
+                await Task.yield()
+                answerFieldIsFocused = true
             }
         }
     }
