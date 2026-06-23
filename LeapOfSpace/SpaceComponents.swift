@@ -121,19 +121,24 @@ struct EditableImage: View {
 }
 
 struct AstronautArt: View {
+    var size: CGFloat = 100
+
     var body: some View {
         EditableImage(name: "astronaut")
-        .frame(width: 100, height: 100)
-        .shadow(color: .cyan.opacity(0.6), radius: 12)
-        .accessibilityLabel("Astronaut")
+            .frame(width: size, height: size)
+            .shadow(color: .cyan.opacity(0.6), radius: 12)
+            .accessibilityLabel("Astronaut")
     }
 }
 
 struct Platform: View {
+    var width: CGFloat = 190
+
     var body: some View {
         RoundedRectangle(cornerRadius: 8)
             .fill(LinearGradient(colors: [.purple, .cyan], startPoint: .leading, endPoint: .trailing))
-            .frame(width: 190, height: 18)
+            .frame(width: width, height: 18)
             .overlay(RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 2))
+            .shadow(color: .cyan.opacity(0.45), radius: 8)
     }
 }

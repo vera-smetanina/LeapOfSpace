@@ -191,10 +191,14 @@ struct AstronautView: View {
             Text("STREAK: \(platformCount)")
                 .font(.headline.monospacedDigit())
                 .foregroundStyle(Color(hex: "FFE347"))
-            AstronautArt()
             if let planet = game.selectedPlanet {
-                PlanetArt(planet: planet, size: 230)
-                    .offset(y: 35)
+                ZStack(alignment: .top) {
+                    PlanetArt(planet: planet, size: 270)
+                        .offset(y: 112)
+                    AstronautArt(size: 145)
+                }
+                .frame(width: 320, height: 285)
+                .accessibilityElement(children: .combine)
             }
         }
         .frame(maxWidth: 650)
@@ -354,21 +358,78 @@ struct ResultView: View {
 struct MovementView: View {
     @EnvironmentObject private var game: GameStore
     let isUp: Bool
-    @State private var moved = false
+    @State private var astronautX: CGFloat = 0
+    @State private var astronautY: CGFloat = 61
+    @State private var platformVisible = false
+
+    private var startsOnPlanet: Bool {
+        game.streak == (isUp ? 1 : 0)
+    }
 
     var body: some View {
-        VStack(spacing: 2) {
-            if isUp { Platform() }
-            AstronautArt()
-                .offset(y: moved ? (isUp ? -25 : 180) : (isUp ? 120 : -80))
-                .rotationEffect(.degrees(moved && !isUp ? 30 : 0))
-            if !isUp { Platform().opacity(0.35) }
-            Text(isUp ? "Platform \(game.streak)!" : "Back to the planet!")
+        VStack(spacing: 18) {
+            ZStack {
+                if isUp {
+                    Platform(width: 180)
+                        .offset(y: -50)
+                        .opacity(platformVisible ? 1 : 0)
+                        .scaleEffect(platformVisible ? 1 : 0.65)
+                }
+
+                if startsOnPlanet, let planet = game.selectedPlanet {
+                    PlanetArt(planet: planet, size: 270)
+                        .offset(y: 256)
+                } else {
+                    Platform(width: 180)
+                        .offset(y: 130)
+                }
+
+                AstronautArt(size: 120)
+                    .offset(x: astronautX, y: astronautY)
+            }
+            .frame(width: 360, height: 420)
+            .clipped()
+
+            Text(isUp ? "Platform \(game.streak)!" : "Oh no!")
                 .font(.title.bold())
-                .padding(.top, 40)
         }
-        .onAppear {
-            withAnimation(.spring(duration: 1.1, bounce: 0.45)) { moved = true }
+        .task {
+            if isUp {
+                await animateJump()
+            } else {
+                await animateFall()
+            }
+        }
+    }
+
+    @MainActor
+    private func animateJump() async {
+        withAnimation(.spring(duration: 0.35, bounce: 0.35)) {
+            platformVisible = true
+        }
+        try? await Task.sleep(for: .milliseconds(180))
+        guard !Task.isCancelled else { return }
+
+        withAnimation(.easeOut(duration: 0.45)) {
+            astronautX = 28
+            astronautY = -155
+        }
+        try? await Task.sleep(for: .milliseconds(450))
+        guard !Task.isCancelled else { return }
+
+        withAnimation(.spring(duration: 0.42, bounce: 0.28)) {
+            astronautX = 0
+            astronautY = -119
+        }
+    }
+
+    @MainActor
+    private func animateFall() async {
+        try? await Task.sleep(for: .milliseconds(180))
+        guard !Task.isCancelled else { return }
+
+        withAnimation(.easeIn(duration: 0.9)) {
+            astronautY = 380
         }
     }
 }
