@@ -41,34 +41,96 @@ struct HomeView: View {
 struct PlanetPickerView: View {
     @EnvironmentObject private var game: GameStore
     private let columns = [GridItem(.adaptive(minimum: 125), spacing: 18)]
+    private let groups = [
+        PlanetDifficultyGroup(
+            difficulty: 1,
+            title: "EASY",
+            subtitle: "Low gravity • Easy questions",
+            color: Color(hex: "62E6A7")
+        ),
+        PlanetDifficultyGroup(
+            difficulty: 3,
+            title: "MEDIUM",
+            subtitle: "Medium gravity • Medium questions",
+            color: Color(hex: "5EC8FF")
+        ),
+        PlanetDifficultyGroup(
+            difficulty: 4,
+            title: "HARD",
+            subtitle: "High gravity • Hard questions",
+            note: "Earth includes both medium and hard questions.",
+            color: Color(hex: "FF9E57")
+        ),
+        PlanetDifficultyGroup(
+            difficulty: 5,
+            title: "SUPER HARD",
+            subtitle: "Strongest gravity • Super-hard questions",
+            color: Color(hex: "FF5C78")
+        )
+    ]
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 28) {
                 Text("CHOOSE YOUR PLANET")
                     .font(.largeTitle.weight(.black))
                     .multilineTextAlignment(.center)
 
-                LazyVGrid(columns: columns, spacing: 22) {
-                    ForEach(game.planets) { planet in
-                        Button {
-                            game.select(planet)
-                        } label: {
-                            VStack(spacing: 4) {
-                                PlanetArt(planet: planet, size: 82)
-                                Text(planet.name)
-                                    .font(.headline)
-                                    .foregroundStyle(.white)
+                ForEach(groups) { group in
+                    let planets = game.planets.filter { $0.difficulty == group.difficulty }
+
+                    GlassCard {
+                        VStack(alignment: .leading, spacing: 18) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(group.title)
+                                    .font(.title2.weight(.black))
+                                    .foregroundStyle(group.color)
+                                Text(group.subtitle)
+                                    .font(.subheadline.bold())
+                                    .foregroundStyle(.white.opacity(0.8))
+                                if let note = group.note {
+                                    Text(note)
+                                        .font(.caption)
+                                        .foregroundStyle(.white.opacity(0.65))
+                                }
+                            }
+
+                            LazyVGrid(columns: columns, spacing: 20) {
+                                ForEach(planets) { planet in
+                                    Button {
+                                        game.select(planet)
+                                    } label: {
+                                        VStack(spacing: 4) {
+                                            PlanetArt(planet: planet, size: 82)
+                                            Text(planet.name)
+                                                .font(.headline)
+                                                .foregroundStyle(.white)
+                                            Text(planet.gravity.formatted(.number.precision(.fractionLength(2))) + " m/s²")
+                                                .font(.caption.monospacedDigit())
+                                                .foregroundStyle(.white.opacity(0.7))
+                                        }
+                                    }
+                                    .buttonStyle(.plain)
+                                }
                             }
                         }
-                        .buttonStyle(.plain)
                     }
                 }
-                .frame(maxWidth: 760)
             }
+            .frame(maxWidth: 800)
             .padding(.vertical)
         }
     }
+}
+
+private struct PlanetDifficultyGroup: Identifiable {
+    let difficulty: Int
+    let title: String
+    let subtitle: String
+    var note: String? = nil
+    let color: Color
+
+    var id: Int { difficulty }
 }
 
 struct SelectedPlanetView: View {
