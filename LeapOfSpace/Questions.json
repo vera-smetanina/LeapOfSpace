@@ -194,7 +194,7 @@
     "difficulty": 1,
     "prompt": "What force attracts masses toward planets and other celestial bodies?",
     "answerStyle": "text",
-    "answers": ["gravity", "gravitational force"],
+    "answers": ["gravity", "gravitational force", "gravitational"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -476,7 +476,10 @@
       "divide mass by volume",
       "mass divided by volume",
       "density equals mass divided by volume",
-      "m/v"
+      "m/v",
+      "mass/volume",
+      "mass over volume",
+      "m over v"
     ],
     "choices": null,
     "imageName": null,
