@@ -122,13 +122,7 @@ struct EditableImage: View {
 
 struct AstronautArt: View {
     var body: some View {
-        ZStack {
-            Image(systemName: "person.crop.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.white, Color(hex: "5EC8FF"))
-            EditableImage(name: "astronaut")
-        }
+        EditableImage(name: "astronaut")
         .frame(width: 100, height: 100)
         .shadow(color: .cyan.opacity(0.6), radius: 12)
         .accessibilityLabel("Astronaut")
