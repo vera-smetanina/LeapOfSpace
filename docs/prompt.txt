@@ -1,0 +1,4 @@
+Initial prompt for Codex GPT-5.5
+
+My twelve year old daughter is building her first game for the Oliphant Science Awards here in Adelaide, Australia. She's written two documents about it in docs folder. It's called "The Leap of Space". Could you please build a SwiftUI game app that will run on iPhone, iPad, and macOS based on her docs instructions? Please make it easy to edit, including adding her own images and questions. She hasn't coded before so please create the game scaffolding including buttons/multiple choice/text boxes for each screen of the game. A clear README for her to follow of next steps would be great thank you.
+
