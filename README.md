@@ -122,26 +122,6 @@ In Xcode, try changing one word or colour at a time, then press **Run** to see w
 5. Add an app icon by opening `AppIcon` inside `Assets.xcassets` and dropping in a square 1024 x 1024 image.
 6. Keep the two original PDFs. They are excellent evidence of the design process from idea to working game.
 
-## A useful safety habit
+## Privacy policy
 
-Before making a big change, choose **File > Duplicate** in Finder and make a backup of the whole project folder. That gives you a version to return to while learning.
-
-## Uploading to GitHub
-
-This folder is ready to become a GitHub repository. The `.gitignore` keeps personal Xcode settings, build results, and macOS clutter out of the upload. GitHub Actions will also try building the Mac and iOS versions after every upload.
-
-1. Create a new empty repository at [github.com/new](https://github.com/new). Do not ask GitHub to create a README or `.gitignore` because this project already has them.
-2. In Terminal, open this project folder and run:
-
-```sh
-git add .
-git commit -m "Create The Leap of Space game"
-git remote add origin https://github.com/YOUR-USERNAME/LeapOfSpace.git
-git push -u origin main
-```
-
-Replace `YOUR-USERNAME` with the GitHub account name and use the repository address GitHub shows after creation.
-
-Before making the repository public, check that the PDFs and any future pictures contain only information you are comfortable sharing online. In particular, avoid including a child's full name, school details, faces, or location information unless a parent has deliberately approved it.
-
-The project does not currently include an open-source licence. That is fine for sharing and judging, but other people do not automatically receive permission to reuse the work. A parent can choose and add a licence later if that is wanted.
+This app collects no personal data. Your high scores are only saved on your own devices.
