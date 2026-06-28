@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "The Leap of Space",
+  "version": "1.0.0",
+  "identifier": "com.oliphant.leapofspace",
+  "build": {
+    "frontendDist": "../app"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "The Leap of Space",
+        "width": 1000,
+        "height": 720,
+        "minWidth": 760,
+        "minHeight": 560,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "nsis",
+    "icon": [
+      "icons/icon.png",
+      "icons/icon.ico"
+    ]
+  }
+}

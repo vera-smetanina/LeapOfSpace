@@ -1,0 +1,20 @@
+[package]
+name = "leap-of-space"
+version = "1.0.0"
+description = "The Leap of Space"
+authors = ["Leap of Space"]
+edition = "2021"
+
+[lib]
+name = "leap_of_space_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "leap-of-space"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }

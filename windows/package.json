@@ -1,0 +1,12 @@
+{
+  "name": "leap-of-space-windows",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A tiny Tauri wrapper for The Leap of Space.",
+  "scripts": {
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0"
+  }
+}
