@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var game: GameStore
+    @ObservedObject private var gameCenter = GameCenterService.shared
     @FocusState private var nameFieldIsFocused: Bool
 
     var body: some View {
@@ -13,7 +14,9 @@ struct HomeView: View {
             Text("THE LEAP\nOF SPACE")
                 .font(.system(size: 54, weight: .black, design: .rounded))
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .minimumScaleFactor(0.55)
+                .fixedSize(horizontal: false, vertical: true)
                 .foregroundStyle(.white)
                 .shadow(color: .purple, radius: 12)
 
@@ -33,6 +36,17 @@ struct HomeView: View {
                 .frame(maxWidth: 360)
             }
             PrimaryButton("PLAY", systemImage: "play.fill", action: game.play)
+            Button {
+                gameCenter.showDefaultLeaderboard()
+            } label: {
+                Label("GAME CENTER", systemImage: "gamecontroller.fill")
+                    .font(.headline.weight(.heavy))
+                    .foregroundStyle(.white)
+            }
+            .buttonStyle(.plain)
+            Text(gameCenter.statusText)
+                .font(.footnote)
+                .foregroundStyle(.white.opacity(0.7))
             Spacer()
             Text("Science gets harder as gravity gets stronger")
                 .font(.footnote)
@@ -127,6 +141,7 @@ struct PlanetPickerView: View {
                 }
             }
             .frame(maxWidth: 800)
+            .padding(.horizontal)
             .padding(.vertical)
         }
     }
@@ -507,6 +522,7 @@ struct NewRecordView: View {
 
 struct LeaderboardView: View {
     @EnvironmentObject private var game: GameStore
+    @ObservedObject private var gameCenter = GameCenterService.shared
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -546,7 +562,15 @@ struct LeaderboardView: View {
                     PrimaryButton("TRY AGAIN", systemImage: "arrow.clockwise", action: game.tryAgain)
                     PrimaryButton("HOME", systemImage: "house.fill", action: game.goHome)
                 }
+                PrimaryButton("GAME CENTER", systemImage: "gamecontroller.fill") {
+                    if let planet = game.selectedPlanet {
+                        gameCenter.showLeaderboards(for: planet)
+                    } else {
+                        gameCenter.showLeaderboards()
+                    }
+                }
             }
+            .padding(.horizontal)
             .padding(.vertical)
         }
     }

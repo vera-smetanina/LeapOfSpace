@@ -17,6 +17,7 @@ final class GameStore: ObservableObject {
     private var usedQuestionIDs: Set<String> = []
     private var gameStartedAt: Date?
     private var transitionTask: Task<Void, Never>?
+    private let gameCenter = GameCenterService.shared
     private let scoreKey = "leapOfSpace.scores"
 
     init() {
@@ -167,6 +168,7 @@ final class GameStore: ObservableObject {
     private func completeGame() {
         guard let planet = selectedPlanet else { return }
         stopTimer()
+        let completedPlanet = streak == eligibleQuestions(for: planet).count
         let previousScores = scores
             .filter { $0.planetID == planet.id && $0.playerName == displayName }
         isNewRecord = streak > 0 && previousScores.allSatisfy {
@@ -174,11 +176,13 @@ final class GameStore: ObservableObject {
                 (streak == $0.streak && finalTime < ($0.duration ?? .infinity))
         }
         if streak > 0 {
-            scores.append(ScoreEntry(
+            let score = ScoreEntry(
                 id: UUID(), playerName: displayName, planetID: planet.id,
                 planetName: planet.name, streak: streak, duration: finalTime, date: Date()
-            ))
+            )
+            scores.append(score)
             saveScores()
+            gameCenter.submit(score: score, completedPlanet: completedPlanet)
         }
         screen = .finish
         after(seconds: 1.8) { [weak self] in
