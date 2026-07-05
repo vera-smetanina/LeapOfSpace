@@ -19,7 +19,9 @@ final class GameCenterService: NSObject, ObservableObject {
     @Published var presentedLeaderboardID: String?
 
     private let leaderboardPrefix = "com.sighmon.LeapOfSpace"
+    private let achievementPrefix = "com.sighmon.LeapOfSpace.achievement"
     private var pendingLeaderboardID: String?
+    private var pendingAchievementIDs = Set<String>()
     private var authenticationStarted = false
     #if os(macOS)
     private var leaderboardWindowController: NSWindowController?
@@ -55,6 +57,9 @@ final class GameCenterService: NSObject, ObservableObject {
                 if self.isAuthenticated, let pendingLeaderboardID = self.pendingLeaderboardID {
                     self.pendingLeaderboardID = nil
                     self.showLeaderboards(leaderboardID: pendingLeaderboardID)
+                }
+                if self.isAuthenticated {
+                    self.flushPendingAchievements()
                 }
             }
         }
@@ -151,8 +156,41 @@ final class GameCenterService: NSObject, ObservableObject {
         }
     }
 
+    func reportAchievements(_ achievements: [Achievement]) {
+        let achievementIDs = achievements.map(\.id)
+        guard !achievementIDs.isEmpty else { return }
+
+        if !GKLocalPlayer.local.isAuthenticated {
+            pendingAchievementIDs.formUnion(achievementIDs)
+            authenticate()
+            return
+        }
+
+        submitAchievements(achievementIDs)
+    }
+
     func leaderboardID(for planetID: String, metric: String) -> String {
         "\(leaderboardPrefix).\(planetID).\(metric)"
+    }
+
+    func firstLeapAchievement() -> Achievement {
+        Achievement(id: "\(achievementPrefix).firstLeap")
+    }
+
+    func recordAchievement(for planetID: String) -> Achievement {
+        Achievement(id: "\(achievementPrefix).record.\(planetID)")
+    }
+
+    func allPlanetRecordsAchievement() -> Achievement {
+        Achievement(id: "\(achievementPrefix).record.allPlanets")
+    }
+
+    func perfectAchievement(for planetID: String) -> Achievement {
+        Achievement(id: "\(achievementPrefix).perfect.\(planetID)")
+    }
+
+    func allPlanetPerfectsAchievement() -> Achievement {
+        Achievement(id: "\(achievementPrefix).perfect.allPlanets")
     }
 
     private func refreshPlayer() {
@@ -163,6 +201,31 @@ final class GameCenterService: NSObject, ObservableObject {
     private func timeContext(for duration: TimeInterval?) -> Int {
         guard let duration else { return 0 }
         return Int((duration * 10).rounded())
+    }
+
+    private func flushPendingAchievements() {
+        guard !pendingAchievementIDs.isEmpty else { return }
+        let achievementIDs = Array(pendingAchievementIDs)
+        pendingAchievementIDs.removeAll()
+        submitAchievements(achievementIDs)
+    }
+
+    private func submitAchievements(_ achievementIDs: [String]) {
+        let achievements = Set(achievementIDs).map { achievementID in
+            let achievement = GKAchievement(identifier: achievementID)
+            achievement.percentComplete = 100
+            achievement.showsCompletionBanner = true
+            return achievement
+        }
+
+        GKAchievement.report(achievements) { [weak self] error in
+            if let error {
+                Task { @MainActor in
+                    self?.pendingAchievementIDs.formUnion(achievementIDs)
+                }
+                print("Game Center achievement submission failed: \(error.localizedDescription)")
+            }
+        }
     }
 
     #if os(macOS)
@@ -199,6 +262,10 @@ final class GameCenterService: NSObject, ObservableObject {
         windowController.showWindow(nil)
     }
     #endif
+}
+
+struct Achievement: Hashable {
+    let id: String
 }
 
 struct GameCenterAuthenticationView: Identifiable {
