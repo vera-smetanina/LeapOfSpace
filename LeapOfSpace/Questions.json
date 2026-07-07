@@ -104,7 +104,7 @@
     "difficulty": 1,
     "prompt": "What do you call the variable you change in an experiment?",
     "answerStyle": "text",
-    "answers": ["independent variable", "the independent variable"],
+    "answers": ["independent variable", "the independent variable", "independent"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -114,7 +114,7 @@
     "difficulty": 1,
     "prompt": "What do you call the variable you measure in an experiment?",
     "answerStyle": "text",
-    "answers": ["dependent variable", "the dependent variable"],
+    "answers": ["dependent variable", "the dependent variable", "dependent"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -124,7 +124,7 @@
     "difficulty": 1,
     "prompt": "What do you call the variables you keep the same in an experiment?",
     "answerStyle": "text",
-    "answers": ["control variables", "controlled variables", "the control variables"],
+    "answers": ["control variables", "controlled variables", "the control variables", "control"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -154,7 +154,7 @@
     "difficulty": 1,
     "prompt": "What is the state change called when a liquid turns into a solid?",
     "answerStyle": "text",
-    "answers": ["freezing"],
+    "answers": ["freezing", "freeze", "frozen", "froze"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -164,7 +164,7 @@
     "difficulty": 1,
     "prompt": "What is the state change called when a solid turns into a liquid?",
     "answerStyle": "text",
-    "answers": ["melting"],
+    "answers": ["melting", "melt", "melted"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -184,7 +184,7 @@
     "difficulty": 1,
     "prompt": "What is the state change called when a gas turns into a liquid?",
     "answerStyle": "text",
-    "answers": ["condensation", "condensing"],
+    "answers": ["condensation", "condensing", "condense"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -214,7 +214,7 @@
     "difficulty": 3,
     "prompt": "Which two elements make up water?",
     "answerStyle": "text",
-    "answers": ["hydrogen and oxygen", "oxygen and hydrogen", "hydrogen oxygen", "H2O"],
+    "answers": ["hydrogen and oxygen", "oxygen and hydrogen", "hydrogen oxygen", "oxygen hydrogen", "H2O"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -317,7 +317,10 @@
     "answers": [
       "Jupiter Saturn Uranus Neptune",
       "Jupiter, Saturn, Uranus and Neptune",
-      "Jupiter, Saturn, Uranus, Neptune"
+      "Jupiter, Saturn, Uranus, Neptune",
+      "Saturn Uranus Neptune Jupiter",
+      "Uranus Neptune Jupiter Saturn",
+      "Neptune Jupiter Saturn Uranus"
     ],
     "choices": null,
     "imageName": null,
@@ -328,7 +331,7 @@
     "difficulty": 3,
     "prompt": "What is a scientific name for the giant outer planets?",
     "answerStyle": "text",
-    "answers": ["Jovian planets", "Jovian planet", "giant planets"],
+    "answers": ["Jovian planets", "Jovian planet", "giant planets", "jovian"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -352,7 +355,7 @@
     "difficulty": 3,
     "prompt": "What is the scientific name for rocky planets?",
     "answerStyle": "text",
-    "answers": ["terrestrial planets", "terrestrial planet"],
+    "answers": ["terrestrial planets", "terrestrial planet", "terrestrial"],
     "choices": null,
     "imageName": null,
     "hint": null

@@ -4,6 +4,10 @@ This is a SwiftUI science game based on the two game plans in the `docs` folder.
 
 Designed for the Oliphant Science Awards in Adelaide, South Australia.
 
+[![Download on the App Store](https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg)](https://apps.apple.com/us/app/leap-of-space/id6780149063)
+[![TestFlight](https://img.shields.io/badge/TestFlight-Join_beta-0A84FF?logo=apple&logoColor=white)](https://testflight.apple.com/join/nAsxHZkb)
+[![CI](https://github.com/vera-smetanina/LeapOfSpace/actions/workflows/build.yml/badge.svg)](https://github.com/vera-smetanina/LeapOfSpace/actions/workflows/build.yml)
+
 The game already includes:
 
 - all eight planets (Pluto is not included, just as the plan says)

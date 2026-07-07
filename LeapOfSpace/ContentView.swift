@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var game: GameStore
+    @ObservedObject private var gameCenter = GameCenterService.shared
 
     var body: some View {
         ZStack {
@@ -39,10 +40,54 @@ struct ContentView: View {
                     LeaderboardView()
                 }
             }
-            .padding()
+            .screenOuterPadding(for: game.screen)
             .transition(.opacity.combined(with: .scale(scale: 0.96)))
             .animation(.easeInOut(duration: 0.35), value: game.screen)
         }
         .preferredColorScheme(.dark)
+        .task {
+            gameCenter.authenticate()
+        }
+        .sheet(item: $gameCenter.authenticationViewController) { authentication in
+            GameCenterAuthenticationRepresentable(viewController: authentication.viewController)
+        }
+        .gameCenterLeaderboardPresentation(isPresented: $gameCenter.showingLeaderboard)
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func screenOuterPadding(for screen: GameScreen) -> some View {
+        #if os(iOS)
+        if screen.usesEdgeToEdgeScroll {
+            self
+        } else {
+            padding()
+        }
+        #else
+        padding()
+        #endif
+    }
+
+    @ViewBuilder
+    func gameCenterLeaderboardPresentation(isPresented: Binding<Bool>) -> some View {
+        #if os(macOS)
+        self
+        #else
+        sheet(isPresented: isPresented) {
+            GameCenterDashboardView()
+        }
+        #endif
+    }
+}
+
+private extension GameScreen {
+    var usesEdgeToEdgeScroll: Bool {
+        switch self {
+        case .choosePlanet, .leaderboard:
+            return true
+        default:
+            return false
+        }
     }
 }

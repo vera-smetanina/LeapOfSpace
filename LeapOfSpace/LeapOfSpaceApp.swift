@@ -8,7 +8,9 @@ struct LeapOfSpaceApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(game)
-                .frame(minWidth: 360, minHeight: 600)
+                #if os(macOS)
+                .frame(minWidth: 430, minHeight: 600)
+                #endif
         }
     }
 }

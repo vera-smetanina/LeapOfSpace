@@ -17,6 +17,7 @@ final class GameStore: ObservableObject {
     private var usedQuestionIDs: Set<String> = []
     private var gameStartedAt: Date?
     private var transitionTask: Task<Void, Never>?
+    private let gameCenter = GameCenterService.shared
     private let scoreKey = "leapOfSpace.scores"
 
     init() {
@@ -167,6 +168,7 @@ final class GameStore: ObservableObject {
     private func completeGame() {
         guard let planet = selectedPlanet else { return }
         stopTimer()
+        let completedPlanet = streak == eligibleQuestions(for: planet).count
         let previousScores = scores
             .filter { $0.planetID == planet.id && $0.playerName == displayName }
         isNewRecord = streak > 0 && previousScores.allSatisfy {
@@ -174,11 +176,14 @@ final class GameStore: ObservableObject {
                 (streak == $0.streak && finalTime < ($0.duration ?? .infinity))
         }
         if streak > 0 {
-            scores.append(ScoreEntry(
+            let score = ScoreEntry(
                 id: UUID(), playerName: displayName, planetID: planet.id,
                 planetName: planet.name, streak: streak, duration: finalTime, date: Date()
-            ))
+            )
+            scores.append(score)
             saveScores()
+            gameCenter.submit(score: score, completedPlanet: completedPlanet)
+            reportAchievements(for: score, on: planet, completedPlanet: completedPlanet)
         }
         screen = .finish
         after(seconds: 1.8) { [weak self] in
@@ -209,6 +214,26 @@ final class GameStore: ObservableObject {
         UserDefaults.standard.set(data, forKey: scoreKey)
     }
 
+    private func reportAchievements(for score: ScoreEntry, on planet: Planet, completedPlanet: Bool) {
+        var achievements = [gameCenter.firstLeapAchievement()]
+
+        if isNewRecord {
+            achievements.append(gameCenter.recordAchievement(for: planet.id))
+            if hasScoreOnEveryPlanet(for: score.playerName) {
+                achievements.append(gameCenter.allPlanetRecordsAchievement())
+            }
+        }
+
+        if completedPlanet {
+            achievements.append(gameCenter.perfectAchievement(for: planet.id))
+            if hasPerfectScoreOnEveryPlanet(for: score.playerName) {
+                achievements.append(gameCenter.allPlanetPerfectsAchievement())
+            }
+        }
+
+        gameCenter.reportAchievements(achievements)
+    }
+
     private var eligibleQuestionsForSelectedPlanet: [ScienceQuestion] {
         guard let selectedPlanet else { return [] }
         return eligibleQuestions(for: selectedPlanet)
@@ -217,6 +242,23 @@ final class GameStore: ObservableObject {
     private func eligibleQuestions(for planet: Planet) -> [ScienceQuestion] {
         let allowedDifficulties = planet.id == "earth" ? Set([3, 4]) : Set([planet.difficulty])
         return questions.filter { allowedDifficulties.contains($0.difficulty) }
+    }
+
+    private func hasScoreOnEveryPlanet(for playerName: String) -> Bool {
+        planets.allSatisfy { planet in
+            scores.contains { $0.playerName == playerName && $0.planetID == planet.id }
+        }
+    }
+
+    private func hasPerfectScoreOnEveryPlanet(for playerName: String) -> Bool {
+        planets.allSatisfy { planet in
+            let questionCount = eligibleQuestions(for: planet).count
+            return scores.contains {
+                $0.playerName == playerName &&
+                    $0.planetID == planet.id &&
+                    $0.streak == questionCount
+            }
+        }
     }
 
     private func stopTimer() {
