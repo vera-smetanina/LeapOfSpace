@@ -134,7 +134,7 @@
     "difficulty": 1,
     "prompt": "What is our galaxy called?",
     "answerStyle": "text",
-    "answers": ["Milky Way", "the Milky Way", "Milky Way galaxy"],
+    "answers": ["Milky Way", "the Milky Way", "Milky Way galaxy", "milky way", "milky way galaxy", "milkyway", "milky-way" ],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -210,6 +210,16 @@
     "hint": null
   },
   {
+      "id": "easy-22",
+      "difficulty": 1,
+      "prompt": "What is the hardest known natural substance?",
+      "answerStyle": "text",
+      "answers": ["diamond", "a diamond", "dimond", "a dimond"],
+      "choices": null,
+      "imageName": null,
+      "hint": null
+  },
+  {
     "id": "medium-01",
     "difficulty": 3,
     "prompt": "Which two elements make up water?",
@@ -223,9 +233,9 @@
     "id": "medium-02",
     "difficulty": 3,
     "prompt": "What is the Sun mostly made of?",
-    "answerStyle": "text",
-    "answers": ["hydrogen", "mostly hydrogen"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["hydrogen"],
+    "choices": ["hydrogen", "helium", "oxygen", "nitrogen"],
     "imageName": null,
     "hint": null
   },
@@ -253,9 +263,9 @@
     "id": "medium-05",
     "difficulty": 3,
     "prompt": "Where is the smallest bone in the human body?",
-    "answerStyle": "text",
-    "answers": ["ear", "in the ear", "middle ear", "in the middle ear"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["ear"],
+    "choices": ["nose", "ear", "leg", "arm"],
     "imageName": null,
     "hint": null
   },
@@ -330,9 +340,9 @@
     "id": "medium-12",
     "difficulty": 3,
     "prompt": "What is a scientific name for the giant outer planets?",
-    "answerStyle": "text",
-    "answers": ["Jovian planets", "Jovian planet", "giant planets", "jovian"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["Jovian"],
+    "choices": ["Terrestrial", "Tellurian", "Jovian", "Epigeic"],
     "imageName": null,
     "hint": null
   },
@@ -354,9 +364,9 @@
     "id": "medium-14",
     "difficulty": 3,
     "prompt": "What is the scientific name for rocky planets?",
-    "answerStyle": "text",
-    "answers": ["terrestrial planets", "terrestrial planet", "terrestrial"],
-    "choices": null,
+    "answerStyle": "mutipleChoice",
+    "answers": ["terrestrial"],
+    "choices": ["Jovian", "Arboreal", "Fossorial", "Terrestrial"],
     "imageName": null,
     "hint": null
   },
@@ -371,12 +381,42 @@
     "hint": null
   },
   {
+    "id": "medium-16",
+    "difficulty": 3,
+    "prompt": "What mostly covers the surface of Mars?",
+    "answerStyle": "text",
+    "answers": ["iron", "irons", "Iron", "Irons"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-17",
+    "difficulty": 3,
+    "prompt": "What is the latin name for the Sun?",
+    "answerStyle": "text",
+    "answers": ["Sol", "sol"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "medium-18",
+    "difficulty": 3,
+    "prompt": "How many times can a Wood-pecker peck wood in a second?",
+    "answerStyle": "multipleChoice",
+    "answers": ["20"],
+    "choices": ["20", "5", "100", "50"],
+    "imageName": null,
+    "hint": null
+  },
+  {
     "id": "hard-01",
     "difficulty": 4,
     "prompt": "What is the name of the tallest mountain in the Solar System?",
-    "answerStyle": "text",
+    "answerStyle": "multipleChoice",
     "answers": ["Olympus Mons"],
-    "choices": null,
+    "choices": ["Olympus Mons", "Mons Huygens ", "Ahuna Mons", "Aeolis Mons"],
     "imageName": null,
     "hint": null
   },
@@ -384,9 +424,9 @@
     "id": "hard-02",
     "difficulty": 4,
     "prompt": "How many known moons does Saturn have?",
-    "answerStyle": "text",
-    "answers": ["274", "two hundred and seventy four"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["274"],
+    "choices": ["243", "274", "389", "312"],
     "imageName": null,
     "hint": null
   },
@@ -394,9 +434,9 @@
     "id": "hard-03",
     "difficulty": 4,
     "prompt": "How many known moons does Jupiter have?",
-    "answerStyle": "text",
-    "answers": ["95", "ninety five"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["95"],
+    "choices": ["83", "110", "95", "123"],
     "imageName": null,
     "hint": null
   },
@@ -454,9 +494,9 @@
     "id": "hard-09",
     "difficulty": 4,
     "prompt": "How many astronauts have walked on the Moon?",
-    "answerStyle": "text",
-    "answers": ["12", "twelve"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["12"],
+    "choices": ["9", "10", "11", "12"]
     "imageName": null,
     "hint": null
   },
@@ -464,9 +504,9 @@
     "id": "hard-10",
     "difficulty": 4,
     "prompt": "People from approximately how many different countries have travelled to space?",
-    "answerStyle": "text",
-    "answers": ["55", "fifty five"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["55"],
+    "choices": ["55", "56", "57", "58"],
     "imageName": null,
     "hint": null
   },
@@ -483,6 +523,7 @@
       "mass/volume",
       "mass over volume",
       "m over v"
+      "d=m/v"
     ],
     "choices": null,
     "imageName": null,
@@ -492,9 +533,9 @@
     "id": "hard-12",
     "difficulty": 4,
     "prompt": "What is the name of the smallest bone in the human body?",
-    "answerStyle": "text",
-    "answers": ["stapes", "the stapes"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["Stapes"],
+    "choices": ["Humerus", "Stapes", "Clavicle", "Hyoid"],
     "imageName": null,
     "hint": null
   },
@@ -509,12 +550,72 @@
     "hint": null
   },
   {
+    "id": "hard-14",
+    "difficulty": 4,
+    "prompt": "What shape is the Milky Way?",
+    "answerStyle": "multipleChoice",
+    "answers": ["Barred spiral"],
+    "choices": ["Spiral", "Barred spiral", "Lanticular", "Elliptical"]
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-15",
+    "difficulty": 4,
+    "prompt": "What is the fastest known animal?",
+    "answerStyle": "text",
+    "answers": ["Persian Hawk", "persian hawk", "Persian hawk", "persian Hawk"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-16",
+    "difficulty": 4,
+    "prompt": "How many bones does a shark have excluding their teeth?",
+    "answerStyle": "text",
+    "answers": ["0", "zero"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-17",
+    "difficulty": 4,
+    "prompt": "On average, how many bones does a dog have?",
+    "answerStyle": "multipleChoice",
+    "answers": ["319"],
+    "choices": ["193", "252", "319", "445"],
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-18",
+    "difficulty": 4,
+    "prompt": "What explosion is brighter than 1 billion stars(Suns)?",
+    "answerStyle": "text",
+    "answers": ["Supernova", "A Supernova", "supernova", "a supernova", "A supernova", "a Supernova"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "hard-19",
+    "difficulty": 4,
+    "prompt": "What hallucination does the deadly Nightshade berry give you?",
+    "answerStyle": "multipleChoice",
+    "answers": ["That you can fly"],
+    "choices": ["That you are sleeping", "That you are experiencing childhood memories", "That you are on fire", "That you can fly"],
+    "imageName": null,
+    "hint": null
+  },
+  {
     "id": "super-hard-01",
     "difficulty": 5,
     "prompt": "What is the heaviest element in the periodic table?",
-    "answerStyle": "text",
-    "answers": ["oganesson", "Og"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["Oganesson"],
+    "choices": ["Nihonium", "Moscovium", "Oganesson", "Uranium"],
     "imageName": null,
     "hint": null
   },
@@ -523,7 +624,7 @@
     "difficulty": 5,
     "prompt": "Approximately how often do Earth and Mars return to the same relative orbital positions?",
     "answerStyle": "text",
-    "answers": ["26 months", "2 years and 2 months", "two years and two months"],
+    "answers": ["26 months", "2 years and 2 months", "two years and two months", "twenty six months", "twenty-six months"],
     "choices": null,
     "imageName": null,
     "hint": null
@@ -567,9 +668,9 @@
     "id": "super-hard-06",
     "difficulty": 5,
     "prompt": "What era did the dinosaurs live in?",
-    "answerStyle": "text",
-    "answers": ["Mesozoic", "Mesozoic era", "the Mesozoic era"],
-    "choices": null,
+    "answerStyle": "multipleChoice",
+    "answers": ["Mesozoic"],
+    "choices": ["Ediacaran", "Cretaceous-Paleogene", "Cryogenian", "Mesozoic"],
     "imageName": null,
     "hint": null
   },
@@ -602,9 +703,9 @@
     "id": "super-hard-09",
     "difficulty": 5,
     "prompt": "In what year did Newton publish his theory of universal gravitation?",
-    "answerStyle": "text",
+    "answerStyle": "multipleChoice",
     "answers": ["1687"],
-    "choices": null,
+    "choices": ["1687", "1688", "1689", "1690"],
     "imageName": null,
     "hint": null
   },
@@ -612,8 +713,68 @@
     "id": "super-hard-10",
     "difficulty": 5,
     "prompt": "In what year did Einstein publish his theory of general relativity?",
-    "answerStyle": "text",
+    "answerStyle": "multipleChoice",
     "answers": ["1915"],
+    "choices": ["1914", "1915", "1916", "1917"],
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-11",
+    "difficulty": 5,
+    "prompt": "How many teeth can a saltwater crocodile grow in its lifetime",
+    "answerStyle": "multipleChoice",
+    "answers": ["3000"],
+    "choices": ["1000", "2000", "3000", "4000"],
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-12",
+    "difficulty": 5,
+    "prompt": "How many times has the Solar System orbited the Milky Way galaxy?",
+    "answerStyle": "text",
+    "answers": ["18", "19", "20", "21", "22", "23", "18 times", "19 times", "20 times", "21 times", "22 times", "23 times"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-13",
+    "difficulty": 5,
+    "prompt": "How many major groups of seaweed are there?",
+    "answerStyle": "text",
+    "answers": ["3", "three"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-14",
+    "difficulty": 5,
+    "prompt": "How long could you draw a straigtline with the average lead pencil? (km)",
+    "answerStyle": "text",
+    "answers": ["56km", "56"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-15",
+    "difficulty": 5,
+    "prompt": "How many times hotter is plasma than the Sun's core?",
+    "answerStyle": "text",
+    "answers": ["100,000", "100,000 times", "100000", "100000 times", "one hundred thousand", "one hundred thousand times"],
+    "choices": null,
+    "imageName": null,
+    "hint": null
+  },
+  {
+    "id": "super-hard-16",
+    "difficulty": 5,
+    "prompt": "What is the deadliest known posion?",
+    "answerStyle": "text",
+    "answers": ["Botulinum Toxin", "Botulinum toxin", "botulinum toxin", "botulinum toxin"],
     "choices": null,
     "imageName": null,
     "hint": null
