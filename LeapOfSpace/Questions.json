@@ -364,8 +364,8 @@
     "id": "medium-14",
     "difficulty": 3,
     "prompt": "What is the scientific name for rocky planets?",
-    "answerStyle": "mutipleChoice",
-    "answers": ["terrestrial"],
+    "answerStyle": "multipleChoice",
+    "answers": ["Terrestrial"],
     "choices": ["Jovian", "Arboreal", "Fossorial", "Terrestrial"],
     "imageName": null,
     "hint": null
@@ -496,7 +496,7 @@
     "prompt": "How many astronauts have walked on the Moon?",
     "answerStyle": "multipleChoice",
     "answers": ["12"],
-    "choices": ["9", "10", "11", "12"]
+    "choices": ["9", "10", "11", "12"],
     "imageName": null,
     "hint": null
   },
@@ -522,7 +522,7 @@
       "m/v",
       "mass/volume",
       "mass over volume",
-      "m over v"
+      "m over v",
       "d=m/v"
     ],
     "choices": null,
@@ -555,7 +555,7 @@
     "prompt": "What shape is the Milky Way?",
     "answerStyle": "multipleChoice",
     "answers": ["Barred spiral"],
-    "choices": ["Spiral", "Barred spiral", "Lanticular", "Elliptical"]
+    "choices": ["Spiral", "Barred spiral", "Lanticular", "Elliptical"],
     "imageName": null,
     "hint": null
   },
