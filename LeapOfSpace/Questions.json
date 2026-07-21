@@ -778,5 +778,15 @@
     "choices": null,
     "imageName": null,
     "hint": null
+  },
+  {
+    "id": "super-hard-17",
+    "difficulty": 5,
+    "prompt": "How many Earth days does it take for Pluto to complete an orbit around the Sun?",
+    "answerStyle": "multipleChoice",
+    "answers": ["90,560"],
+    "choices": ["101", "1,092", "10,430", "90,560"],
+    "imageName": null,
+    "hint": null
   }
 ]
